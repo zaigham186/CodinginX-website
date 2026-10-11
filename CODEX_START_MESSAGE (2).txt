@@ -1,0 +1,13 @@
+Build the CodinginX website in this repository.
+
+Follow `AGENTS.md` and read `CODINGINX_MASTER_PROMPT.md` completely before beginning substantial implementation. Treat the master prompt as the source of truth and keep referring back to it throughout the work.
+
+Build the real production website, not a prototype or simplified version. Do not silently skip requirements just to finish faster. Use professional judgment for implementation details and do not repeatedly stop for minor approvals.
+
+Do not fabricate missing company facts, credentials, founder information, client work, metrics, legal decisions, or external account details. If something genuinely requires information or access I have not supplied, implement the correct safe integration point and mark it as pending.
+
+First inspect the existing repository and current project state. Then proceed through implementation, responsive QA, functionality, testing, linting, type checking, production build validation, security review, and launch-readiness checks.
+
+Fix issues you find where possible instead of merely listing them.
+
+Only ask me when a genuine missing business fact, credential, legal choice, external account, required asset, or permission prevents correct implementation.
