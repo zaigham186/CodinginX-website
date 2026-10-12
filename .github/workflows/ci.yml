@@ -1,0 +1,47 @@
+name: Website quality
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run audit:security
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Start local production build
+        run: |
+          npm run start > /tmp/codinginx-next.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:3000/api/health; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - run: npm run test:e2e
+        env:
+          TEST_INTEGRATIONS_UNCONFIGURED: 'true'
+      - run: npm run test:load
+        env:
+          TEST_INTEGRATIONS_UNCONFIGURED: 'true'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-reports
+          path: |
+            work/playwright-report
+            work/browser-results.json
+            work/load-test-results.json
+          retention-days: 14

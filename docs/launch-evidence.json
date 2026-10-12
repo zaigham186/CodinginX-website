@@ -1,0 +1,37 @@
+{
+  "status": "not-yet-launch-ready",
+  "gates": {
+    "legal_review_and_final_pages": {
+      "verified": false,
+      "evidence": "Privacy and Terms remain clearly labeled review drafts. Business/legal approval pending."
+    },
+    "resend_domain_and_real_delivery": {
+      "verified": false,
+      "evidence": "Provider key and verified sender pending. Integration is fail-closed; no actual messages sent."
+    },
+    "distributed_limits_and_idempotency": {
+      "verified": false,
+      "evidence": "Upstash account, secret, staging Lua/integration verification pending. Mock and local concurrency tests do not verify production Redis."
+    },
+    "hosting_and_source_delivery": {
+      "verified": false,
+      "evidence": "Source is published on the codinginx-website GitHub branch. Production hosting configuration and deployment remain pending."
+    },
+    "domain_https_and_redirects": {
+      "verified": false,
+      "evidence": "codinginx.com DNS, certificate, apex/www redirects and production responses require deployment/access."
+    },
+    "monitoring_and_alert_delivery": {
+      "verified": false,
+      "evidence": "Health endpoint and safe runtime logging implemented. External uptime monitor, log retention and alert destination pending."
+    },
+    "mailbox_privacy_and_recovery": {
+      "verified": false,
+      "evidence": "Approved inquiry retention/access and provider/mailbox recovery procedures pending. Application database backup not applicable."
+    },
+    "production_walkthrough": {
+      "verified": false,
+      "evidence": "Run full launch walkthrough on codinginx.com after external configuration. Local checks are not production evidence."
+    }
+  }
+}
