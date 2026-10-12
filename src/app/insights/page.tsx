@@ -6,6 +6,7 @@ import {
   getPublishedInsights,
 } from "@/content/insights";
 import { pageMetadata } from "@/lib/metadata";
+import { InsightVisual } from "@/components/insight-visual";
 
 export const metadata = pageMetadata(
   "Insights",
@@ -28,28 +29,31 @@ export default function InsightsPage() {
           {articles.length > 0 ? (
             <div className="article-list">
               {articles.map((article, index) => (
-                <article className="editorial-grid" key={article.slug}>
-                  <div className="meta-row">
-                    <span aria-hidden="true">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span>{article.category}</span>
-                    <span>{getInsightReadingMinutes(article)} min read</span>
-                  </div>
-                  <div className="stack">
-                    <h2>
-                      <Link href={`/insights/${article.slug}`}>
-                        {article.title}
+                <article className="insight-feature" key={article.slug}>
+                  <InsightVisual slug={article.slug} />
+                  <div className="insight-feature-copy">
+                    <div className="meta-row">
+                      <span aria-hidden="true">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span>{article.category}</span>
+                      <span>{getInsightReadingMinutes(article)} min read</span>
+                    </div>
+                    <div className="stack">
+                      <h2>
+                        <Link href={`/insights/${article.slug}`}>
+                          {article.title}
+                        </Link>
+                      </h2>
+                      <p className="lead">{article.description}</p>
+                      <Link
+                        className="text-link"
+                        href={`/insights/${article.slug}`}
+                        aria-label={`Read article: ${article.title}`}
+                      >
+                        Read article <Arrow />
                       </Link>
-                    </h2>
-                    <p className="lead">{article.description}</p>
-                    <Link
-                      className="text-link"
-                      href={`/insights/${article.slug}`}
-                      aria-label={`Read article: ${article.title}`}
-                    >
-                      Read article <Arrow />
-                    </Link>
+                    </div>
                   </div>
                 </article>
               ))}

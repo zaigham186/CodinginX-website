@@ -1,0 +1,198 @@
+{
+  "verifiedAt": "2026-10-12T18:28:20.188Z",
+  "scope": "Local production build in Chromium. External delivery, hosting, domain, legal, monitoring and recovery gates remain pending. No real paid provider requests.",
+  "checks": {
+    "format": true,
+    "lint": true,
+    "typecheck": true,
+    "productionBuild": true,
+    "staticOutputs": 28,
+    "unitTests": {
+      "passed": 59,
+      "files": 7
+    },
+    "browserTests": {
+      "fullSuitePassed": 53,
+      "skipped": 0,
+      "followUpRedesignPassed": 7
+    },
+    "responsive": {
+      "routes": 20,
+      "widths": [320, 375, 768, 1280, 1440, 1920],
+      "visits": 120,
+      "unexpectedOverflow": 0
+    },
+    "accessibility": {
+      "axeViolations": 0,
+      "scope": "20 content routes, mobile assistant, mobile reduced-motion workflow"
+    },
+    "dependencyAudit": {
+      "vulnerabilities": 0
+    },
+    "pageErrors": 0,
+    "launchChecker": {
+      "exitCode": 2,
+      "status": "not-yet-launch-ready",
+      "requiredExternalGatesPending": 8
+    }
+  },
+  "productMedia": [
+    {
+      "name": "intake-desktop",
+      "width": 1312,
+      "height": 590,
+      "bytes": 36732
+    },
+    {
+      "name": "operations-desktop",
+      "width": 1312,
+      "height": 641,
+      "bytes": 23962
+    },
+    {
+      "name": "operations-mobile",
+      "width": 322,
+      "height": 938,
+      "bytes": 22334
+    }
+  ],
+  "performance": [
+    {
+      "mode": "1440px local unthrottled",
+      "lcp": 676,
+      "cls": 0.0006071621591073495,
+      "interaction": 160,
+      "transferBytes": 308376
+    },
+    {
+      "mode": "375px, 4x CPU, 1.6Mbps, 150ms latency",
+      "lcp": 1512,
+      "cls": 0.01694411414982164,
+      "interaction": 168,
+      "transferBytes": 271603
+    }
+  ],
+  "concurrency": {
+    "testedAt": "2026-10-12T18:28:20.188Z",
+    "target": "http://127.0.0.1:3000",
+    "scope": "Local production build only. No email or AI provider credentials. Does not prove deployed capacity or third-party integration performance.",
+    "concurrency": 100,
+    "totalRequests": 700,
+    "results": [
+      {
+        "scenario": "/",
+        "concurrency": 100,
+        "requests": 100,
+        "expectedStatuses": [200],
+        "statuses": {
+          "200": 100
+        },
+        "failures": 0,
+        "latencyMs": {
+          "p50": 674,
+          "p95": 693,
+          "max": 699
+        },
+        "batchMs": 706
+      },
+      {
+        "scenario": "/services",
+        "concurrency": 100,
+        "requests": 100,
+        "expectedStatuses": [200],
+        "statuses": {
+          "200": 100
+        },
+        "failures": 0,
+        "latencyMs": {
+          "p50": 428,
+          "p95": 430,
+          "max": 431
+        },
+        "batchMs": 435
+      },
+      {
+        "scenario": "/work",
+        "concurrency": 100,
+        "requests": 100,
+        "expectedStatuses": [200],
+        "statuses": {
+          "200": 100
+        },
+        "failures": 0,
+        "latencyMs": {
+          "p50": 257,
+          "p95": 258,
+          "max": 259
+        },
+        "batchMs": 265
+      },
+      {
+        "scenario": "/contact",
+        "concurrency": 100,
+        "requests": 100,
+        "expectedStatuses": [200],
+        "statuses": {
+          "200": 100
+        },
+        "failures": 0,
+        "latencyMs": {
+          "p50": 855,
+          "p95": 857,
+          "max": 859
+        },
+        "batchMs": 861
+      },
+      {
+        "scenario": "contact-invalid",
+        "concurrency": 100,
+        "requests": 100,
+        "expectedStatuses": [400],
+        "statuses": {
+          "400": 100
+        },
+        "failures": 0,
+        "latencyMs": {
+          "p50": 148,
+          "p95": 228,
+          "max": 236
+        },
+        "batchMs": 261
+      },
+      {
+        "scenario": "contact-unconfigured",
+        "concurrency": 100,
+        "requests": 100,
+        "expectedStatuses": [503],
+        "statuses": {
+          "503": 100
+        },
+        "failures": 0,
+        "latencyMs": {
+          "p50": 118,
+          "p95": 210,
+          "max": 219
+        },
+        "batchMs": 227
+      },
+      {
+        "scenario": "chat-guided",
+        "concurrency": 100,
+        "requests": 100,
+        "expectedStatuses": [200, 429],
+        "statuses": {
+          "200": 100
+        },
+        "failures": 0,
+        "latencyMs": {
+          "p50": 110,
+          "p95": 192,
+          "max": 200
+        },
+        "batchMs": 206
+      }
+    ],
+    "healthyAfter": true,
+    "passed": true
+  }
+}

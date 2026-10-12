@@ -2,7 +2,7 @@
 
 The official CodinginX software engineering and AI website. [CODINGINX_MASTER_PROMPT.md](CODINGINX_MASTER_PROMPT.md) is the product, design, engineering and launch source of truth. Read it completely alongside [AGENTS.md](AGENTS.md) before substantial changes.
 
-**Current release status: Not yet launch-ready.** The website is implemented and local validation passed: clean install, lint, type checking, 59 unit/integration tests, 46 Chromium checks, production build and a zero-advisory dependency audit. Real production delivery, domain/HTTPS, operational accounts and business/legal approvals require external inputs. The user approved leaving these integrations configurable and pending. [Launch readiness](docs/launch-readiness.md) records evidence and exact outstanding requirements; it must not be replaced by an assumption that a successful build means a complete launch.
+**Current release status: Not yet launch-ready.** The website is implemented and local validation passed: clean install, lint, type checking, 59 unit/integration tests, 53 Chromium checks plus seven final interaction follow-ups, production build and a zero-advisory dependency audit. Real production delivery, domain/HTTPS, operational accounts and business/legal approvals require external inputs. The user approved leaving these integrations configurable and pending. [Launch readiness](docs/launch-readiness.md) records evidence and exact outstanding requirements; it must not be replaced by an assumption that a successful build means a complete launch.
 
 ## Documentation
 
@@ -14,6 +14,7 @@ cd CodinginX-website
 ```
 
 - [Requirements traceability](docs/requirements.md): all 119 numbered master-prompt sections and review surfaces.
+- [Visual redesign](docs/redesign.md): art direction, motion, product media provenance and maintenance.
 - [Security and data handling](docs/security.md): trust boundaries, applicable controls, safe logging and incident handling.
 - [Deployment and operations](docs/deployment.md): local/staging preparation, Vercel, environment separation, domain, monitoring, rollback and backup applicability.
 - [Launch readiness](docs/launch-readiness.md): observed test results, launch gate, unresolved facts and production inputs.

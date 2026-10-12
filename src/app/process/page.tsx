@@ -1,5 +1,5 @@
-import { Container, Section, PageIntro, FinalCTA } from "@/components/ui";
-import { processSteps } from "@/content/process";
+import { Container, Section, FinalCTA } from "@/components/ui";
+import { ScrollStory } from "@/components/scroll-story";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
   "Our Process",
@@ -9,42 +9,66 @@ export const metadata = pageMetadata(
 export default function ProcessPage() {
   return (
     <>
-      <PageIntro
-        eyebrow="HOW WE WORK"
-        title="Clear steps. Useful progress."
-        description="A shared understanding of the problem gives the work direction. A visible process helps everyone make better decisions as the product takes shape."
-      />
-      <Section>
+      <section className="process-hero">
         <Container>
-          {processSteps.map((s) => (
-            <article className="process-detail editorial-grid" key={s.number}>
-              <div>
-                <p className="eyebrow">{s.number} / THE PROCESS</p>
-                <h2>{s.title}</h2>
-              </div>
-              <div className="stack">
-                <p className="lead">{s.description}</p>
-                <ul className="rule-list">
-                  {s.activities.map((a) => (
-                    <li key={a}>{a}</li>
-                  ))}
-                </ul>
-                <p className="process-outcome">
-                  <strong>The outcome</strong>
-                  <br />
-                  {s.outcome}
-                </p>
-              </div>
-            </article>
-          ))}
+          <div className="section-index">
+            <span>HOW WE WORK</span>
+            <span>FROM THE FIRST QUESTION TO THE NEXT RELEASE</span>
+          </div>
+          <h1 data-reveal="type">
+            Good work
+            <br />
+            has <span>good foundations.</span>
+          </h1>
+          <div className="process-hero-foot">
+            <p>
+              A shared understanding of the problem gives the work direction. A
+              visible process keeps decisions connected as the product takes
+              shape.
+            </p>
+            <div className="process-lifecycle" aria-label="Project lifecycle">
+              {[
+                "Discover",
+                "Plan",
+                "Design",
+                "Build",
+                "Test",
+                "Launch",
+                "Grow",
+              ].map((stage) => (
+                <span key={stage}>{stage}</span>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+      <Section className="process-story-section">
+        <Container>
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">THE PROCESS / IN PRACTICE</p>
+              <h2>
+                From a clear question
+                <br />
+                to something you can use.
+              </h2>
+            </div>
+            <p>
+              Follow the thinking.
+              <br />
+              Inspect the kinds of artifacts it creates.
+            </p>
+          </div>
+          <ScrollStory variant="process" />
         </Container>
       </Section>
-      <Section className="problem-section">
-        <Container className="editorial-grid">
-          <h2>
-            A plan that stays
+      <Section className="process-principle">
+        <Container>
+          <p className="eyebrow">A PLAN CONNECTED TO REALITY</p>
+          <h2 data-reveal="type">
+            Learn as you go.
             <br />
-            connected to reality.
+            <span>Keep the direction clear.</span>
           </h2>
           <p className="lead">
             Projects change as people learn. We discuss the effect of a change

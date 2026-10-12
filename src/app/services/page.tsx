@@ -2,11 +2,13 @@ import Link from "next/link";
 import {
   Container,
   Section,
-  PageIntro,
   FinalCTA,
   Arrow,
+  ButtonLink,
 } from "@/components/ui";
+import { ProductVisual } from "@/components/product-visual";
 import { services } from "@/content/services";
+import { serviceVisuals } from "@/content/presentation";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
   "Services",
@@ -16,45 +18,89 @@ export const metadata = pageMetadata(
 export default function ServicesPage() {
   return (
     <>
-      <PageIntro
-        eyebrow="OUR SERVICES"
-        title="The right technology for the work ahead."
-        description="Start with the problem. Define what useful looks like. Build the software, interfaces, and connections that make it possible."
-      />
-      <Section>
+      <section className="services-hero">
         <Container>
-          {services.map((service) => (
-            <article
-              className="service-feature editorial-grid"
-              key={service.slug}
-            >
-              <div>
-                <p className="eyebrow">
-                  {service.index} / {service.title}
-                </p>
-                <h2>{service.headline}</h2>
-              </div>
-              <div className="stack">
+          <div className="section-index">
+            <span>OUR SERVICES</span>
+            <span>SOFTWARE + AI + DIGITAL PRODUCTS</span>
+          </div>
+          <h1 data-reveal="type">
+            The right technology.
+            <br />
+            <span>The useful next step.</span>
+          </h1>
+          <div className="services-hero-bottom">
+            <p>
+              Start with the problem. Define what useful looks like. Build the
+              software, interfaces, and connections that make it possible.
+            </p>
+            <nav aria-label="Service index">
+              {services.map((service) => (
+                <Link key={service.slug} href={"#" + service.slug}>
+                  <span>{service.index}</span>
+                  {service.title}
+                  <Arrow />
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </Container>
+      </section>
+      {services.map((service, index) => (
+        <Section
+          key={service.slug}
+          id={service.slug}
+          className={
+            "service-chapter service-chapter-" +
+            (index % 2 ? "reverse" : "forward")
+          }
+        >
+          <Container>
+            <div className="service-chapter-top">
+              <span className="service-chapter-number">{service.index}</span>
+              <p className="eyebrow">{service.title}</p>
+              <span className="service-chapter-coordinate">
+                BUILT AROUND THE ACTUAL TASK
+              </span>
+            </div>
+            <div className="service-chapter-grid">
+              <div className="service-chapter-copy">
+                <h2 data-reveal="type">{service.headline}</h2>
                 <p className="lead">{service.summary}</p>
-                <ul className="capability-tags">
-                  {service.capabilities.map((cap) => (
-                    <li key={cap.title}>{cap.title}</li>
+                <ul className="service-capability-index">
+                  {service.capabilities.map((capability) => (
+                    <li key={capability.title}>{capability.title}</li>
                   ))}
                 </ul>
-                <Link href={`/services/${service.slug}`} className="text-link">
-                  Explore {service.title} <Arrow />
+                <Link className="text-link" href={"/services/" + service.slug}>
+                  Explore {service.title}
+                  <Arrow />
                 </Link>
               </div>
-            </article>
-          ))}
-        </Container>
-      </Section>
-      <Section className="problem-section">
+              <div>
+                <ProductVisual
+                  kind={
+                    serviceVisuals[service.slug as keyof typeof serviceVisuals]
+                      .kind
+                  }
+                />
+                <p className="service-media-caption">
+                  {
+                    serviceVisuals[service.slug as keyof typeof serviceVisuals]
+                      .caption
+                  }
+                </p>
+              </div>
+            </div>
+          </Container>
+        </Section>
+      ))}
+      <Section className="service-fit-section">
         <Container className="editorial-grid">
           <h2>
-            Not sure where
+            Start with
             <br />
-            your project fits?
+            the question.
           </h2>
           <div className="stack">
             <p className="lead">
@@ -62,9 +108,7 @@ export default function ServicesPage() {
               people need to do, what is slowing them down, and what you want to
               change.
             </p>
-            <Link href="/contact" className="text-link">
-              Start a Project <Arrow />
-            </Link>
+            <ButtonLink href="/contact">Start a Project</ButtonLink>
           </div>
         </Container>
       </Section>

@@ -15,6 +15,8 @@ const csp = [
   ...(!isDev ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 const nextConfig: NextConfig = {
+  // Browser QA uses this loopback host; this only affects development resources.
+  allowedDevOrigins: ["127.0.0.1"],
   // TS6 compiler API avoids a detached CLI subprocess in restricted build runners.
   experimental: { useTypeScriptCli: false },
   poweredByHeader: false,

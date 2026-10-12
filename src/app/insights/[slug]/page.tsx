@@ -10,6 +10,7 @@ import {
   getPublishedInsights,
 } from "@/content/insights";
 import { pageMetadata } from "@/lib/metadata";
+import { InsightVisual } from "@/components/insight-visual";
 
 type InsightPageProps = { params: Promise<{ slug: string }> };
 
@@ -85,6 +86,11 @@ export default async function InsightPage({ params }: InsightPageProps) {
             <span>{getInsightReadingMinutes(insight)} min read</span>
           </div>
         </PageIntro>
+        <div className="article-visual">
+          <Container>
+            <InsightVisual slug={insight.slug} />
+          </Container>
+        </div>
         <Section>
           <Container>
             <div className="editorial-grid">

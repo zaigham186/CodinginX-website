@@ -33,6 +33,7 @@ export default async function ContactPage({
         eyebrow="START A PROJECT"
         title="What are you working on?"
         description="An idea to build. A workflow to simplify. A product ready for its next chapter. Tell us where you are and what needs to happen."
+        className="contact-intro"
       />
       <Section className="contact-section">
         <Container className="contact-layout">

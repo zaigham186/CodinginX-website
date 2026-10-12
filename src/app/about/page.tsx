@@ -20,6 +20,7 @@ export default function AboutPage() {
         eyebrow="ABOUT CODINGINX"
         title="Thoughtful people. Practical technology."
         description="We are a USA-based software engineering, AI, and digital product company. Our focus is useful technology that solves meaningful business problems."
+        className="about-intro"
       />
       <Section>
         <Container className="editorial-grid">
@@ -53,8 +54,19 @@ export default function AboutPage() {
             <p>Two people. A shared direction.</p>
           </div>
           <div className="founder-grid">
-            {publishedFounders.map((f) => (
+            {publishedFounders.map((f, index) => (
               <article className="founder" key={f.id}>
+                <span className="founder-index">
+                  0{index + 1} / THE CO-FOUNDERS
+                </span>
+                {!f.image && (
+                  <div className="founder-monogram" aria-hidden="true">
+                    {f.name
+                      .split(" ")
+                      .map((word) => word[0])
+                      .join("")}
+                  </div>
+                )}
                 {f.image && (
                   <Image
                     {...f.image}
@@ -63,7 +75,7 @@ export default function AboutPage() {
                   />
                 )}
                 <span className="eyebrow">{f.role}</span>
-                <h3>{f.name}</h3>
+                <h3 data-reveal="type">{f.name}</h3>
                 {f.biography.map((p) => (
                   <p key={p}>{p}</p>
                 ))}

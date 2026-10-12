@@ -54,6 +54,9 @@ export function Footer() {
             <Link href="/terms">Terms</Link>
           </nav>
         </div>
+        <div className="footer-wordmark" aria-hidden="true">
+          Codingin<span>X</span>
+        </div>
       </Container>
     </footer>
   );

@@ -68,17 +68,25 @@ export function PageIntro({
   title,
   description,
   children,
+  className = "",
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   children?: ReactNode;
+  className?: string;
 }) {
   return (
-    <section className="page-intro">
+    <section className={`page-intro ${className}`}>
       <Container>
-        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-        <h1>{title}</h1>
+        <div className="intro-heading-meta">
+          {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+          <span className="intro-registration" aria-hidden="true">
+            <i />
+            <i />
+          </span>
+        </div>
+        <h1 data-reveal="type">{title}</h1>
         {description && <p className="lead">{description}</p>}
         {children}
       </Container>
@@ -108,14 +116,24 @@ export function FAQAccordion({
 }
 export function FinalCTA() {
   return (
-    <section className="final-cta">
+    <section className="final-cta studio-final-cta">
       <Container>
+        <svg
+          className="cta-brand-mark"
+          aria-hidden="true"
+          viewBox="0 0 200 200"
+        >
+          <path
+            d="M30 20h35l105 160h-35L30 20Zm105 0h35L65 180H30L135 20Z"
+            fill="currentColor"
+          />
+        </svg>
         <p className="eyebrow">LET’S BUILD SOMETHING USEFUL</p>
         <div className="final-cta-inner">
-          <h2>
-            Your next chapter,
+          <h2 data-reveal="type">
+            Let’s build
             <br />
-            built with purpose.
+            <span>the next chapter.</span>
           </h2>
           <div>
             <p>

@@ -5,13 +5,16 @@ import { getProjectBySlug } from "@/content/projects";
 import {
   Container,
   Section,
-  PageIntro,
-  ButtonLink,
   FinalCTA,
   FAQAccordion,
   Arrow,
 } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
+import { ServiceHero } from "@/components/service-hero";
+import { ScrollStory } from "@/components/scroll-story";
+import { DesignJourney } from "@/components/design-journey";
+import { ProductVisual, SystemArchitecture } from "@/components/product-visual";
+import { serviceVisuals } from "@/content/presentation";
 export function generateStaticParams() {
   return services.map(({ slug }) => ({ slug }));
 }
@@ -38,13 +41,14 @@ export default async function ServicePage({
   const project = getProjectBySlug(service.relatedProject);
   return (
     <>
-      <PageIntro
-        eyebrow={service.title}
-        title={service.headline}
-        description={service.summary}
-      >
-        <ButtonLink href="/contact">{service.cta}</ButtonLink>
-      </PageIntro>
+      <ServiceHero
+        slug={service.slug as keyof typeof serviceVisuals}
+        index={service.index}
+        title={service.title}
+        headline={service.headline}
+        summary={service.summary}
+        cta={service.cta}
+      />
       <Section>
         <Container className="editorial-grid">
           <h2>
@@ -58,6 +62,93 @@ export default async function ServicePage({
           </div>
         </Container>
       </Section>
+      {service.slug === "ai-automation" && (
+        <Section className="automation-story-section">
+          <Container>
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">A SYSTEM, NOT A SPECTACLE</p>
+                <h2>
+                  Follow the information.
+                  <br />
+                  See what changes.
+                </h2>
+              </div>
+              <p>
+                A possible automation architecture.
+                <br />A person stays in control.
+              </p>
+            </div>
+            <ScrollStory />
+          </Container>
+        </Section>
+      )}
+      {service.slug === "custom-software" && (
+        <Section className="software-architecture-section">
+          <Container>
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">INSIDE A WORKING EXAMPLE</p>
+                <h2>
+                  Build the workflow.
+                  <br />
+                  Make the boundaries clear.
+                </h2>
+              </div>
+              <p>
+                Our browser-local operations demo
+                <br />
+                makes the core interactions inspectable.
+              </p>
+            </div>
+            <SystemArchitecture variant="operations" />
+          </Container>
+        </Section>
+      )}
+      {service.slug === "ui-ux-design" && (
+        <Section className="design-journey-section">
+          <Container>
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">FROM THE TASK TO THE INTERFACE</p>
+                <h2>
+                  Every screen
+                  <br />
+                  starts with a question.
+                </h2>
+              </div>
+              <p>
+                Explore artifacts based on
+                <br />
+                our working Intake lab demonstration.
+              </p>
+            </div>
+            <DesignJourney />
+          </Container>
+        </Section>
+      )}
+      {service.slug === "web-mobile-development" && (
+        <Section className="responsive-experience-section">
+          <Container>
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">ONE EXPERIENCE / DIFFERENT SCREENS</p>
+                <h2>
+                  Built for use.
+                  <br />
+                  Wherever it happens.
+                </h2>
+              </div>
+              <p>
+                Real desktop and mobile views
+                <br />
+                of our working operations demonstration.
+              </p>
+            </div>
+            <ProductVisual kind="responsive" />
+          </Container>
+        </Section>
+      )}
       <Section className="service-capabilities">
         <Container className="editorial-grid">
           <div>
@@ -113,7 +204,7 @@ export default async function ServicePage({
           <Container className="editorial-grid">
             <p className="eyebrow">EXPLORE A WORKING DEMONSTRATION</p>
             <div className="stack">
-              <h2>{project.title}</h2>
+              <h2 data-reveal="type">{project.title}</h2>
               <p className="lead">{project.summary}</p>
               <p className="muted">
                 Internal demonstration. Its scope and limitations are explained

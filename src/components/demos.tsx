@@ -1,41 +1,12 @@
 "use client";
 import { useEffect, useId, useRef, useState } from "react";
 import { trackEvent } from "./analytics";
+import { extractDemoLead, sampleInquiry, type DemoLead } from "@/lib/demo-lead";
 
-type Lead = {
-  name: string;
-  email: string;
-  company: string;
-  service: string;
-  summary: string;
-};
-const example =
-  "Name: Alex Sample\nEmail: alex@example.com\nCompany: Example Service Co.\nWe need an online booking system so customers can request an appointment and our team can track the work. We currently manage requests in a spreadsheet.";
-function extractLead(text: string): Lead {
-  const line = (label: string) =>
-    text.match(new RegExp(`^${label}:\\s*(.+)$`, "im"))?.[1]?.trim() || "";
-  return {
-    name: line("Name"),
-    email: text.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i)?.[0] || "",
-    company: line("Company"),
-    service: /book|schedul/i.test(text)
-      ? "Booking & scheduling"
-      : /automat|AI|inquiry/i.test(text)
-        ? "Workflow automation"
-        : /website|web site/i.test(text)
-          ? "Business website"
-          : "Needs review",
-    summary: text
-      .split("\n")
-      .filter((t) => !/^(Name|Email|Company):/i.test(t))
-      .join(" ")
-      .trim(),
-  };
-}
 export function LeadIntakeDemo({ compact = false }: { compact?: boolean }) {
   const id = useId();
-  const [input, setInput] = useState(example);
-  const [lead, setLead] = useState<Lead | null>(null);
+  const [input, setInput] = useState(sampleInquiry);
+  const [lead, setLead] = useState<DemoLead | null>(null);
   const [notice, setNotice] = useState("");
   const result = useRef<HTMLDivElement>(null);
   function process() {
@@ -45,7 +16,7 @@ export function LeadIntakeDemo({ compact = false }: { compact?: boolean }) {
       );
       return;
     }
-    setLead(extractLead(input));
+    setLead(extractDemoLead(input));
     setNotice(
       "Fields extracted using rules. Review and correct each value before export.",
     );
@@ -77,6 +48,14 @@ export function LeadIntakeDemo({ compact = false }: { compact?: boolean }) {
         </div>
         <span className="demo-label">RULE-BASED / LOCAL ONLY</span>
       </div>
+      <div className="demo-progress" aria-label="Intake workflow">
+        <span className="is-complete">01 / Inquiry</span>
+        <span className={lead ? "is-complete" : ""}>02 / Review</span>
+        <span>03 / Export</span>
+        <span className="demo-progress-state">
+          {lead ? "Ready for human review" : "Start with the sample"}
+        </span>
+      </div>
       <div className="demo-grid">
         <div className="demo-input-pane">
           <label htmlFor={`${id}-message`} className="demo-section-title">
@@ -106,7 +85,7 @@ export function LeadIntakeDemo({ compact = false }: { compact?: boolean }) {
               type="button"
               className="demo-reset"
               onClick={() => {
-                setInput(example);
+                setInput(sampleInquiry);
                 setLead(null);
                 setNotice("Sample restored.");
               }}
@@ -121,9 +100,18 @@ export function LeadIntakeDemo({ compact = false }: { compact?: boolean }) {
           </h3>
           {lead ? (
             <div className="demo-result-fields">
-              {(Object.keys(lead) as (keyof Lead)[]).map((key) => (
-                <div className="demo-result-field" key={key}>
+              {(Object.keys(lead) as (keyof DemoLead)[]).map((key) => (
+                <div
+                  className="demo-result-field"
+                  key={key}
+                  data-empty={!lead[key].trim()}
+                >
                   <label htmlFor={`${id}-${key}`}>{key}</label>
+                  {!lead[key].trim() && (
+                    <span className="demo-field-note">
+                      Add missing information
+                    </span>
+                  )}
                   {key === "summary" ? (
                     <textarea
                       id={`${id}-${key}`}
@@ -303,6 +291,17 @@ export function OperationsDemo({ compact = false }: { compact?: boolean }) {
           <span className="demo-subtitle">Every request has a next step</span>
         </div>
         <span className="demo-label">SAMPLE DATA / LOCAL ONLY</span>
+      </div>
+      <div className="operations-summary" aria-label="Sample request states">
+        {statuses.map((status) => (
+          <div key={status}>
+            <span>{status}</span>
+            <strong>
+              {jobs.filter((job) => job.status === status).length}
+            </strong>
+            <i aria-hidden="true" />
+          </div>
+        ))}
       </div>
       <div className="operations-body">
         <form onSubmit={add} className="demo-booking-form">

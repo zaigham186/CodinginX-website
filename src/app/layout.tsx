@@ -2,12 +2,14 @@ import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/instrument-sans";
 import "@fontsource/ibm-plex-mono/latin-400.css";
 import "@/styles/globals.css";
+import "@/styles/redesign.css";
 import { siteConfig } from "@/config/siteConfig";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { SiteAssistant } from "@/components/assistant";
 import { Analytics } from "@/components/analytics";
 import { JsonLd } from "@/components/json-ld";
+import { MotionSystem } from "@/components/motion-system";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -38,7 +40,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content
@@ -50,6 +52,7 @@ export default function RootLayout({
         <Footer />
         {siteConfig.chatbot.enabled && <SiteAssistant />}
         <Analytics />
+        <MotionSystem />
         <JsonLd
           data={{
             "@context": "https://schema.org",
