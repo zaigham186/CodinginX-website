@@ -12,8 +12,8 @@ export interface Founder {
 // Add only supplied, publication-approved founder information.
 export const founders: Founder[] = [
   {
-    id: "mohammad-sulema-khan",
-    name: "Mohammad Sulema Khan",
+    id: "mohammad-suleman-khan",
+    name: "Mohammad Suleman Khan",
     role: "Co-founder",
     biography: [],
     responsibilities: [],
